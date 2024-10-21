@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Calculator </title>
+    <style>
+      body {
+        font-family: serif;
+        text-align: center;
+      }
+      
+      .calculator {
+        width: 340px;
+        height: 400px;
+        background-color: rgba(22, 22, 22, 0.659);
+        margin: auto;
+        border: solid;
+        border-radius: 25px;
+        padding: 10px;
+        box-shadow: 10px 10px 10px rgb(208, 191, 191);
+      }
+      
+      button{
+        background-color: rgba(0, 0, 0, 0.385);
+        color: white;
+        width: 60px;
+        height: 60px;
+        font-size: 25px;
+        margin: 5px;
+        border: groove;
+        border-radius: 20px;
+        cursor: pointer;
+        box-shadow: 8px 8px 8px rgba(95, 93, 93, 0.977);
+      }
+
+      button:hover{
+        opacity: 0.6;
+      }
+      
+      .screen{
+        box-sizing: border-box;
+        background-color: rgb(227, 227, 216);
+        width: 300px;
+        height: 50px;
+        font-size: 25px;
+        border: 1px solid black;
+        border-radius: 10px;
+        margin-top: 15px;
+        margin-left: 0px;
+        margin-bottom: 10px;
+        box-shadow: 10px 10px 10px rgba(94, 92, 92, 0.977);
+        text-align: right;
+        color: black;
+        padding-top: 20px;
+        overflow: auto;
+        padding-right: 23px;
+        padding-top: 8px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <h1 style = "font-family: Verdana, Geneva, Tahoma, sans-serif;
+      color: rgb(66, 66, 66); text-align: center; 
+      margin-bottom: 40px; font-size: 40px;"> My calculator </h1>
+    </div>
+      
+    <div class = "calculator ">
+
+      <input type="text" class="screen"  id="result" placeholder="0">
+    
+      <div>
+    
+        <div>
+          <button onclick="addNumber(1)"> 1 </button>
+          <button onclick="addNumber(2)"> 2 </button>
+          <button onclick="addNumber(3)"> 3 </button>
+          <button onclick="addOperator('+')"> <b> <i> &plus; </i> </b> </button>
+        </div>
+
+        <div>
+          <button onclick="addNumber(4)"> 4 </button>
+          <button onclick="addNumber(5)"> 5 </button>
+          <button onclick="addNumber(6)"> 6 </button>
+          <button onclick="addOperator('-')"> <b> <i> &minus; </i> </b> </button>
+        </div>
+
+        <div> 
+          <button onclick="addNumber(7)"> 7 </button>
+          <button onclick="addNumber(8)"> 8 </button>
+          <button onclick="addNumber(9)"> 9 </button>
+          <button onclick="addOperator('*')"> <b> <i> &times; </i> </b> </button>
+        </div>
+
+        <div>
+          <button onclick="addNumber(0)"> <b> <i> 0 </i> </b> </button>
+          <button onclick="clearResult()"> <b> <i> AC </i> </b> </button>
+          <button onclick="calculateResult()"> <b> <i> = </i> </b> </button>
+          <button onclick="addOperator('/')"> <b> <i> &divide; </i> </b> </button>
+        </div>
+
+      </div>
+    </div>
+
+
+    <script>
+      let firstNumber = '';
+      let operator = '';
+      let clear = false;
+
+      function clearResult() {
+        document.getElementById('result').value = '';
+        firstNumber = '';
+        operator = '';
+      }
+
+      function addNumber(number) {
+        const result = document.getElementById('result');
+        if (clear) {
+          result.value = '';
+          clear = false;
+        }
+        result.value += number;
+      }
+
+      function addOperator(op) {
+        const result = document.getElementById('result');
+        if (firstNumber === '') {
+          firstNumber = result.value;
+        } else {
+          calculateResult();
+        }
+        operator = op;
+        clear = true;
+      }
+
+      function calculateResult() {
+        const result = document.getElementById('result');
+        const secondNumber = result.value;
+        switch (operator) {
+          case '+':
+            result.value = parseInt(firstNumber) + parseInt(secondNumber);
+            break;
+          case '-':
+          result.value = parseInt(firstNumber) - parseInt(secondNumber);
+            break;
+          case '*':
+          result.value = parseInt(firstNumber) * parseInt(secondNumber);
+            break;
+          case '/':
+          result.value = parseInt(firstNumber) / parseInt(secondNumber);
+            break;
+        }
+        firstNumber = result.value;
+        operator = ' ';
+        clear = true;
+      }
+    </script>
+  </body>
+</html>
